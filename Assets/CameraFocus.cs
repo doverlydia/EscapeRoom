@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -14,7 +13,6 @@ public class CameraFocus : MonoBehaviour
         {
             currentLocation = 0;
         }
-        Debug.Log("plus");
     }
     public void MinusLocation()
     {
@@ -23,7 +21,6 @@ public class CameraFocus : MonoBehaviour
         {
             currentLocation = allCameraLocations.Count - 1;
         }
-        Debug.Log("minus");
     }
     public void CreateNew()
     {
@@ -44,8 +41,6 @@ public class CameraFocus : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             float worldMouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-            Debug.Log("mouse " + worldMouseX);
-            Debug.Log("camera " + Camera.main.transform.position.x);
             if (worldMouseX < Camera.main.transform.position.x)
             {
                 PlusLocation();
