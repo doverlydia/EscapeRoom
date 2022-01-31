@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.EventSystems;
 
 public class CameraFocus : MonoBehaviour
 {
@@ -38,10 +39,11 @@ public class CameraFocus : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            float worldMouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-            if (worldMouseX < Camera.main.transform.position.x)
+            Vector3 worldMousepos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if (worldMousepos.x < Camera.main.transform.position.x)
             {
                 PlusLocation();
             }
@@ -52,6 +54,18 @@ public class CameraFocus : MonoBehaviour
             Camera.main.transform.position = new Vector3(allCameraLocations[currentLocation].position.x, allCameraLocations[currentLocation].position.y, Camera.main.transform.position.z);
         }
     }
+
+    void OnDrawGizmos()
+    {
+        // Blue
+        Gizmos.color = new Color(0.0f, 0.0f, 1.0f);
+        DrawRect(Camera.main.ScreenToWorldPoint(Input.mousePosition), 3);
+    }
+    void DrawRect(Vector2 pos, float radius)
+    {
+        Gizmos.DrawWireCube(new Vector3(pos.x, pos.y, 0.01f), new Vector3(radius, radius, 0.01f));
+    }
+
 }
 
 [CustomEditor(typeof(CameraFocus))]
