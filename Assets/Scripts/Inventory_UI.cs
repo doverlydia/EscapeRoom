@@ -19,11 +19,10 @@ public class Inventory_UI : MonoBehaviour
 
     public void AddUI()
     {
-        CollectableObject item = inventory.collectedObjects[inventory.collectedObjects.Count - 1];
-        Sprite sprite = item.GetComponent<SpriteRenderer>().sprite;
+        Sprite item = inventory.collectedObjects[inventory.collectedObjects.Count - 1];
         GameObject invItem = Instantiate(inventoryItemPrefab, content);
 
-        invItem.GetComponent<Image>().sprite = sprite;
+        invItem.GetComponent<Image>().sprite = item;
         invItem.GetComponent<Image>().preserveAspect = true;
     }
 }

@@ -18,7 +18,7 @@ public class CreateNewCollectable : MonoBehaviour
         collectable.name = _name;
         collectable.AddComponent<SpriteRenderer>().sprite = _sprite;
         collectable.GetComponent<SpriteRenderer>().sortingLayerName = _type == Type.Regular ? "Default" : "Hidden";
-        collectable.AddComponent<CollectableObject>();
+        collectable.AddComponent<CollectableObject>().sr = collectable.GetComponent<SpriteRenderer>();
         collectable.GetComponent<CollectableObject>().inventory = inventory;
     }
 }

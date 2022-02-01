@@ -8,10 +8,10 @@ using UnityEngine.UI;
 
 public class Inventory : ScriptableObject
 {
-    [SerializeField] internal List<CollectableObject> collectedObjects = new List<CollectableObject>();
+    [SerializeField] internal List<Sprite> collectedObjects = new List<Sprite>();
     internal UnityEvent itemAdded;
 
-    public void AddToInventory(CollectableObject item)
+    public void AddToInventory(Sprite item)
     {
         collectedObjects.Add(item);
         itemAdded.Invoke();

@@ -22,7 +22,7 @@ public class TransformerObject : MonoBehaviour, IPointerClickHandler
     {
         foreach (var item in collectObjectsNeeded)
         {
-            if (!inventory.collectedObjects.Contains(item))
+            if (!inventory.collectedObjects.Contains(item.sr.sprite))
                 return false;
         }
         return true;

@@ -7,10 +7,11 @@ using UnityEngine.UI;
 public class CollectableObject : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] internal Inventory inventory;
-    public bool collected => inventory.collectedObjects.Contains(this);
+    [SerializeField] internal SpriteRenderer sr;
+    public bool collected => inventory.collectedObjects.Contains(sr.sprite);
     public void OnPointerClick(PointerEventData eventData)
     {
-        inventory.AddToInventory(this);
+        inventory.AddToInventory(gameObject.GetComponent<SpriteRenderer>().sprite);
         gameObject.SetActive(false);
     }
 }
