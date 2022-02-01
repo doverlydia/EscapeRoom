@@ -1,21 +1,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+enum Type
+{
+    Regular,
+    Hidden
+}
 public class CreateNewCollectable : MonoBehaviour
 {
     [SerializeField] Sprite _sprite;
     [SerializeField] string _name = "new collectable";
-
+    [SerializeField] Type _type = Type.Regular;
+    [SerializeField] Inventory inventory;
     public void CreateNew()
     {
         GameObject collectable = new GameObject();
         collectable.name = _name;
         collectable.AddComponent<SpriteRenderer>().sprite = _sprite;
+        collectable.GetComponent<SpriteRenderer>().sortingLayerName = _type == Type.Regular ? "Default" : "Hidden";
         collectable.AddComponent<CollectableObject>();
-        Rigidbody2D rb= collectable.AddComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
-        rb.freezeRotation = true;
-        rb.constraints= RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-        collectable.AddComponent<BoxCollider2D>();
+        collectable.GetComponent<CollectableObject>().inventory = inventory;
     }
 }

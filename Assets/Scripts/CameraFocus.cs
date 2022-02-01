@@ -65,9 +65,9 @@ public class CameraFocus : MonoBehaviour
     {
         Gizmos.DrawWireCube(new Vector3(pos.x, pos.y, 0.01f), new Vector3(radius, radius, 0.01f));
     }
-
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(CameraFocus))]
 public class CameraFocalGenerator : Editor
 {
@@ -81,3 +81,5 @@ public class CameraFocalGenerator : Editor
         }
     }
 }
+#endif
+

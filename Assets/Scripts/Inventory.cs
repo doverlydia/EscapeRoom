@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-public class Inventory : MonoBehaviour
+[CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory", order = 1)]
+
+public class Inventory : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] internal List<CollectableObject> collectedObjects = new List<CollectableObject>();
+    internal UnityEvent itemAdded;
+
+    public void AddToInventory(CollectableObject item)
     {
-        
+        collectedObjects.Add(item);
+        itemAdded.Invoke();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        collectedObjects.Clear();
     }
 }

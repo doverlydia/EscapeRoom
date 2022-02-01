@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(BoxCollider2D))]
+enum ObjectType
+{
+    movable,
+    revealer
+}
 
+[RequireComponent(typeof(BoxCollider2D))]
 public class RoomObject : MonoBehaviour, IPointerClickHandler
 {
     public bool moved { get; private set; }
+    [SerializeField] ObjectType type;
 
     [Header("Position when clicked")]
     Vector2 pos1;
@@ -19,7 +25,11 @@ public class RoomObject : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         moved = !moved;
-        transform.position = moved ? pos2 : pos1;
+
+        if (type == ObjectType.movable)
+            transform.position = moved ? pos2 : pos1;
+        else if (type == ObjectType.revealer)
+            GetComponent<SpriteRenderer>().sortingLayerName = moved? "Hidden" : "Default";
     }
     void OnDrawGizmos()
     {
